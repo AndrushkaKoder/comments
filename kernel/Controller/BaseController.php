@@ -31,5 +31,10 @@ class BaseController
 		return $this->request;
 	}
 
+	public function redirect(string $to): void
+	{
+		header("Location: {$to}");
+	}
+
 
 }
