@@ -23,7 +23,7 @@ class Router
 	{
 		$route = $this->findRoute($uri, $method);
 
-		if (!$route) $this->notFound();
+		if (!$route) notFound();
 
 		if (is_array($route->getAction())) {
 			[$controller, $action] = $route->getAction();
@@ -63,11 +63,5 @@ class Router
 		if (!isset($this->routes[$method][$uri])) return null;
 
 		return $this->routes[$method][$uri];
-	}
-
-	private function notFound(): void
-	{
-		http_response_code(404);
-		exit("<h1>Page not found</h1> <a href='/'>go back</a>");
 	}
 }

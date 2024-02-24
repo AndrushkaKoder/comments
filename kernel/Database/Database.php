@@ -53,7 +53,7 @@ class Database
 	{
 		$table = static::$table;
 
-		if(!static::$pdo) self::connect();
+		if (!static::$pdo) self::connect();
 		$selectFields = count($fields) ? implode(',', $fields) : '*';
 		$where = '';
 
@@ -102,7 +102,7 @@ class Database
 		$statement->execute($conditions);
 	}
 
-	public static function first(int $id)
+	public static function first($id)
 	{
 		$table = static::$table;
 		$query = "SELECT * FROM {$table} WHERE id = {$id} LIMIT 1";
