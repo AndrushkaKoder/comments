@@ -9,11 +9,12 @@ use Kernel\controller\BaseController;
 
 class PostController extends BaseController
 {
-
 	use RecursiveBuilderTrait;
 
 	private Post $postTable;
 	private Comment $commentTable;
+
+	private const DEPTH = 10;
 
 	public function __construct()
 	{
@@ -82,7 +83,7 @@ class PostController extends BaseController
 		$commentId = intval($this->request()->input('comment_id'));
 		if ($comment) {
 			$countComments = $this->commentTable::select(['parent_id' => $commentId]);
-			if (count($countComments) < 3) {
+			if (count($countComments) < self::DEPTH) {
 				$this->commentTable::insert([
 					'text' => $comment,
 					'parent_id' => intval($this->request()->input('comment_id')),
